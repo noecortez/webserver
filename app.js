@@ -2,11 +2,14 @@ const express = require('express')
 const app = express()
 const port = 8080
 
+// * Servir contenido estático
+app.use(express.static('public'));
 
-//  Le indicamos a esta función que será de tipo GET.
-//  El primer parámetro es la ruta a la que el cliente
-//  accederá, mientras que el segundo, es una función o
-//  callback para que realice la respuesta del servidor.
+
+// Le indicamos a esta función que será de tipo GET.
+// El primer parámetro es la ruta a la que el cliente
+// accederá, mientras que el segundo, es una función o
+// callback para que realice la respuesta del servidor.
 app.get('/', (req, res) => {
   res.send('Home Page')
 })
