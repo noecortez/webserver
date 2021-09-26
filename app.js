@@ -1,6 +1,15 @@
 const express = require('express')
+const hbs = require('hbs')
+
 const app = express()
 const port = 8080
+
+// * HANDLEBARS
+app.set('view engine', 'hbs')
+// Registra las partes que se reutilizaran
+hbs.registerPartials(__dirname + '/views/partials', (err) => {
+  console.log(err);
+})
 
 // * Servir contenido estático
 // Buscará mostrar el contenido que se encuentre
@@ -14,8 +23,29 @@ app.use(express.static('public'))
 // callback para que realice la respuesta del servidor.
 // ! Esta ruta es ignorada para dar más prioridad al
 // ! middleware
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
   res.send('Home Page')
+}) */
+
+app.get('/', (req, res) => {
+  res.render('home', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
+})
+
+app.get('/generic', (req, res) => {
+  res.render('generic', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
+})
+
+app.get('/elements', (req, res) => {
+  res.render('elements', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
 })
 
 // ? Estás rutas son mostradas dado que no se
