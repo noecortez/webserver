@@ -1,16 +1,20 @@
 const express = require('express')
+const hbs = require('hbs')
+
 const app = express()
 const port = 8080
 
-// TODO: require('hbs')
-
-// Haciendo uso de 'hbs'
+// * HANDLEBARS
 app.set('view engine', 'hbs')
+// Registra las partes que se reutilizaran
+hbs.registerPartials(__dirname + '/views/partials', (err) => {
+  console.log(err);
+})
 
 // * Servir contenido estático
 // Buscará mostrar el contenido que se encuentre
 // en el directorio 'public'
-//app.use(express.static('public'))
+app.use(express.static('public'))
 
 
 // Le indicamos a esta función que será de tipo GET.
@@ -24,7 +28,24 @@ app.set('view engine', 'hbs')
 }) */
 
 app.get('/', (req, res) => {
-  res.render('home')
+  res.render('home', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
+})
+
+app.get('/generic', (req, res) => {
+  res.render('generic', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
+})
+
+app.get('/elements', (req, res) => {
+  res.render('elements', {
+    nombre: 'Noe Cortez',
+    titulo: 'Curso de NodeJS',
+  })
 })
 
 // ? Estás rutas son mostradas dado que no se
